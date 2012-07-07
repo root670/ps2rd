@@ -491,7 +491,7 @@ int main(int argc, char *argv[])
 				case GAMELIST:
 					if( selectedGame < numberOfGameTitles - 1 )
 					{
-						if( cursorY >= (MAXIMUM_ITEMS_PER_PAGE * CURSOR_INCREMENT) ) // if we've reached the bottom of a page...
+						if( cursorY >= ( CURSOR_TOP + ( ( MAXIMUM_ITEMS_PER_PAGE - 1 ) * CURSOR_INCREMENT) ) ) // if we've reached the bottom of a page...
 						{
 							page++;
 							selectedGame++;
