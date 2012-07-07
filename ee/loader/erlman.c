@@ -39,6 +39,7 @@ typedef struct {
 	struct erl_record_t *erl;
 } erl_file_t;
 
+/*
 typedef struct {
 	int auto_hook;
 	int patch_loadmodule;
@@ -52,15 +53,16 @@ typedef struct {
 	} ip_config;
 } debugger_opts_t;
 
+*/
 enum {
 	ERL_FILE_ENGINE = 0,
 	ERL_FILE_LIBKERNEL,
 #if 0
 	ERL_FILE_LIBC,
-	ERL_FILE_LIBDEBUG,
+//	ERL_FILE_LIBDEBUG,
 #endif
 	ERL_FILE_LIBPATCHES,
-	ERL_FILE_DEBUGGER,
+//	ERL_FILE_DEBUGGER,
 	ERL_FILE_ELFLDR,
 	ERL_FILE_VIDEOMOD,
 
@@ -72,10 +74,10 @@ extern u8  _engine_erl_start[];
 extern u8  _libkernel_erl_start[];
 #if 0
 extern u8  _libc_erl_start[];
-extern u8  _libdebug_erl_start[];
+//extern u8  _libdebug_erl_start[];
 #endif
 extern u8  _libpatches_erl_start[];
-extern u8  _debugger_erl_start[];
+//extern u8  _debugger_erl_start[];
 extern u8  _elfldr_erl_start[];
 extern u8  _videomod_erl_start[];
 
@@ -93,19 +95,19 @@ static erl_file_t _erl_files[ERL_FILE_NUM] = {
 		.name = "libc.erl",
 		.start = _libc_erl_start,
 	},
-	[ERL_FILE_LIBDEBUG] = {
-		.name = "libdebug.erl",
-		.start = _libdebug_erl_start,
-	},
+//	[ERL_FILE_LIBDEBUG] = {
+//		.name = "libdebug.erl",
+//		.start = _libdebug_erl_start,
+//	},
 #endif
 	[ERL_FILE_LIBPATCHES] = {
 		.name = "libpatches.erl",
 		.start = _libpatches_erl_start,
 	},
-	[ERL_FILE_DEBUGGER] = {
-		.name = "debugger.erl",
-		.start = _debugger_erl_start,
-	},
+//	[ERL_FILE_DEBUGGER] = {
+//		.name = "debugger.erl",
+//		.start = _debugger_erl_start,
+//	},
 	[ERL_FILE_ELFLDR] = {
 		.name = "elfldr.erl",
 		.start = _elfldr_erl_start,
@@ -189,10 +191,10 @@ int install_erls(const config_t *config, engine_t *engine)
 		if (__install_erl(file, addr) < 0)
 			return -1;
 
-		addr += ALIGN(file->erl->fullsize, 64);
-		file = &_erl_files[ERL_FILE_LIBDEBUG];
-		if (__install_erl(file, addr) < 0)
-			return -1;
+//		addr += ALIGN(file->erl->fullsize, 64);
+//		file = &_erl_files[ERL_FILE_LIBDEBUG];
+//		if (__install_erl(file, addr) < 0)
+//			return -1;
 #endif
 		addr += ALIGN(file->erl->fullsize, 64);
 		file = &_erl_files[ERL_FILE_LIBPATCHES];
@@ -261,7 +263,7 @@ int install_erls(const config_t *config, engine_t *engine)
 
 	/*
 	 * install debugger
-	 */
+	 
 	if (config_get_bool(config, SET_DEBUGGER_INSTALL)) {
 		void (*set_debugger_opts)(debugger_opts_t *opts) = NULL;
 		debugger_opts_t opts;
@@ -277,15 +279,15 @@ int install_erls(const config_t *config, engine_t *engine)
 
 		if (__install_erl(file, addr) < 0)
 			return -1;
-
-		/* add debugger_loop() callback to engine */
+			
+		// add debugger_loop() callback to engine
 		if (config_get_bool(config, SET_ENGINE_INSTALL)) {
 			int (*debugger_loop)(void) = NULL;
 			GET_SYMBOL(debugger_loop, "debugger_loop");
 			engine->register_callback(debugger_loop);
 		}
 
-		/* set debugger options */
+		// set debugger options
 		GET_SYMBOL(set_debugger_opts, "set_debugger_opts");
 		memset(&opts, 0, sizeof(opts));
 		opts.auto_hook = config_get_bool(config, SET_DEBUGGER_AUTO_HOOK);
@@ -298,7 +300,7 @@ int install_erls(const config_t *config, engine_t *engine)
 		strncpy(opts.ip_config.gateway, config_get_string(config, SET_DEBUGGER_GATEWAY), 15);
 		set_debugger_opts(&opts);
 	}
-
+*/
 	/*
 	 * install ELF loader
 	 */

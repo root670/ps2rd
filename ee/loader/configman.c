@@ -61,6 +61,10 @@ void config_build(config_t *config)
 #ifdef CHEATS_FILE
 	config_setting_set_string(set, CHEATS_FILE);
 #endif
+	set = config_setting_add(group, "path_is_absolute", CONFIG_TYPE_BOOL);
+#ifdef PATH_IS_ABSOLUTE
+	config_setting_set_bool(set, PATH_IS_ABSOLUTE);
+#endif
 	/*
 	 * engine section
 	 */
@@ -218,7 +222,7 @@ void config_print(const config_t *config)
 	PRINT_BOOL(SET_ENGINE_INSTALL);
 	PRINT_HEX(SET_ENGINE_ADDR);
 
-	/* debugger */
+	/* debugger
 	PRINT_BOOL(SET_DEBUGGER_INSTALL);
 	PRINT_HEX(SET_DEBUGGER_ADDR);
 	PRINT_BOOL(SET_DEBUGGER_AUTO_HOOK);
@@ -230,6 +234,7 @@ void config_print(const config_t *config)
 	PRINT_STRING(SET_DEBUGGER_IPADDR);
 	PRINT_STRING(SET_DEBUGGER_NETMASK);
 	PRINT_STRING(SET_DEBUGGER_GATEWAY);
+	*/
 
 	/* sdklibs */
 	PRINT_BOOL(SET_SDKLIBS_INSTALL);

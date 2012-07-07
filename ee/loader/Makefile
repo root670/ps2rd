@@ -6,9 +6,9 @@
 # $Id$
 ##
 
-EE_INCS += -I$(LIBCHEATS)/include -I$(LIBCONFIG)/include
+EE_INCS += -I$(LIBCHEATS)/include -I$(LIBCONFIG)/include -I$(PS2DEV)/gsKit/include
 EE_CFLAGS += -DPS2RD_VERSION='"$(PS2RD_VERSION)"'
-EE_LDFLAGS += -L$(LIBCHEATS)/lib -L$(LIBCONFIG)/lib
+EE_LDFLAGS += -L$(LIBCHEATS)/lib -L$(LIBCONFIG)/lib -L$(PS2DEV)/gsKit/lib
 EE_ASFLAGS +=
 
 EE_BIN = ps2rd.elf
@@ -23,8 +23,8 @@ ERL_OBJS += videomod_erl.o
 IRX_OBJS += debugger_irx.o
 IRX_OBJS += eesync_irx.o
 IRX_OBJS += memdisk_irx.o
-IRX_OBJS += ps2dev9_irx.o
-IRX_OBJS += ps2ip_irx.o
+#IRX_OBJS += ps2dev9_irx.o
+#IRX_OBJS += ps2ip_irx.o
 IRX_OBJS += ps2smap_irx.o
 IRX_OBJS += usb_mass_irx.o
 IRX_OBJS += usbd_irx.o
@@ -43,6 +43,25 @@ EE_LIBS += -ldebug
 EE_LIBS += -lerl
 EE_LIBS += -lpad
 EE_LIBS += -lpatches
+EE_LIBS += -lgskit_toolkit -lgskit -ldmakit -lc -lkernel
+
+EE_INCS += -I$(GSKITSRC)/ee/gs/include  -I$(GSKITSRC)/ee/dma/include -I$(GSKITSRC)/ee/toolkit/include -I$(PS2GDB)/ee
+EE_CFLAGS += -fno-builtin-printf
+
+# linker flags
+EE_LIB_DIRS += -L$(GSKITSRC)/lib -L$(PS2SDK)/ee/lib -L$(PS2GDB)/lib
+EE_LDFLAGS += $(EE_LIB_DIRS)
+
+ifeq (x$(GSKIT), x)
+GSKIT = $(PS2DEV)/gsKit
+endif
+
+#GCCLIB = $(PS2DEV)/ee/lib/gcc-lib/ee/3.2.2
+#CPPLIB = $(PS2DEV)/ee/ee/lib
+
+LIBGSKIT = $(GSKITSRC)/lib/libgskit.a
+LIBDMAKIT = $(GSKITSRC)/lib/libdmakit.a
+LIBGSKIT_TOOLKIT = $(GSKITSRC)/lib/libgskit_toolkit.a
 
 ifeq ($(DEBUG),1)
 EE_CFLAGS += -D_DEBUG -g

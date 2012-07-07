@@ -265,6 +265,40 @@ end:
 	return buf;
 }
 
+static inline int write_text_file(const char *filename, char *buffer)
+{
+	int filesize = strlen(buffer);
+	int fd = open(filename, O_WRONLY);
+	
+	if (fd < 0) {
+		fprintf(stderr, "%s: Can't open text file for writing %s\n",
+				__FUNCTION__, filename);
+		return 0;
+	}
+	
+	if (filesize <= 0)
+	{
+		fprintf(stderr, "%s: Buffer is empty! %s\n",
+				__FUNCTION__, filename);
+		return 0;
+	}
+
+	if (filesize > 0) {
+		if (write(fd, buffer, filesize) != filesize) {
+			fprintf(stderr, "%s: Can't write text file %s\n",
+				__FUNCTION__, filename);
+//			free(buffer);
+//			buffer = NULL;
+			goto end;
+		}
+	}
+
+//	buf[filesize] = '\0';
+end:
+	close(fd);
+	return 1;
+}
+
 /*
  * Wrapper to call nopdelay many times.
  */

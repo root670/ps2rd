@@ -1,6 +1,6 @@
 "Kingdom Hearts"
 Enable Code (Must Be On)
-90263228 0C09291F
+9AD05952 18072E65
 Press Start For Save Menu
 204865E0 00114288
 Max Munny
@@ -12,6 +12,8 @@ Have All 101 Dalmatians
 203F339C FFFFFFFF
 Have All Trinity's
 003F38AB 000000FF
+Characters Are Beheaded
+20124094 00000000
 Characters Are Huge
 10124054 00004000
 Characters Are Larger
@@ -24,6 +26,19 @@ Press L3 to Fly Anywhere
 E002FFFD 004DD49C
 602DCAE0 00000008
 00000001 00000070
+*Have Summon Codes
+Dumbo
+003F2460 00000000
+Bambi
+003F2461 00000001
+Genie
+003F2462 00000002
+Tinker Bell
+003F2463 00000003
+Mushu
+003F2464 00000004
+Simba
+003F2465 00000005
 *In-Battle Codes
 Infinite Health (All Characters)
 200C0220 920100BD
@@ -924,222 +939,6 @@ E003FDFF 004DD49C
 102B6568 00000010
 102B6570 00000021
 102B6574 00000003
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
-World of Chaos Part V - Final Ansem II (Battle with Allies)
-E003FDFF 004DD49C
-102B6568 00000010
-102B6570 00000021
-102B6574 00000004
-
-//--------
-
-"Game 22"
 World of Chaos Part V - Final Ansem II (Battle with Allies)
 E003FDFF 004DD49C
 102B6568 00000010

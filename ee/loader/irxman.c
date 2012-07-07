@@ -39,19 +39,19 @@ static const char *_modules[] = {
 };
 
 /* Statically linked IRX files */
-extern u8  _ps2dev9_irx_start[];
-extern u8  _ps2dev9_irx_end[];
-extern int _ps2dev9_irx_size;
-extern u8  _ps2ip_irx_start[];
-extern u8  _ps2ip_irx_end[];
-extern int _ps2ip_irx_size;
+//extern u8  _ps2dev9_irx_start[];
+//extern u8  _ps2dev9_irx_end[];
+//extern int _ps2dev9_irx_size;
+//extern u8  _ps2ip_irx_start[];
+//extern u8  _ps2ip_irx_end[];
+//extern int _ps2ip_irx_size;
 extern u8  _ps2smap_irx_start[];
 extern u8  _ps2smap_irx_end[];
 extern int _ps2smap_irx_size;
 #ifdef _SMS_MODULES
-extern u8  _ps2ip_sms_irx_start[];
-extern u8  _ps2ip_sms_irx_end[];
-extern int _ps2ip_sms_irx_size;
+//extern u8  _ps2ip_sms_irx_start[];
+//extern u8  _ps2ip_sms_irx_end[];
+//extern int _ps2ip_sms_irx_size;
 extern u8  _ps2smap_sms_irx_start[];
 extern u8  _ps2smap_sms_irx_end[];
 extern int _ps2smap_sms_irx_size;
@@ -136,16 +136,16 @@ void install_modules(const config_t *config)
 	 */
 #ifdef _SMS_MODULES
 	if (config_get_bool(config, SET_DEBUGGER_SMS_MODULES)) {
-		ramfile_set(file_ptr++, "ps2ip", _ps2ip_sms_irx_start, _ps2ip_sms_irx_size);
+//		ramfile_set(file_ptr++, "ps2ip", _ps2ip_sms_irx_start, _ps2ip_sms_irx_size);
 		ramfile_set(file_ptr++, "ps2smap", _ps2smap_sms_irx_start, _ps2smap_sms_irx_size);
 	} else {
 #endif
-		ramfile_set(file_ptr++, "ps2ip", _ps2ip_irx_start, _ps2ip_irx_size);
+//		ramfile_set(file_ptr++, "ps2ip", _ps2ip_irx_start, _ps2ip_irx_size);
 		ramfile_set(file_ptr++, "ps2smap", _ps2smap_irx_start, _ps2smap_irx_size);
 #ifdef _SMS_MODULES
 	}
 #endif
-	ramfile_set(file_ptr++, "ps2dev9", _ps2dev9_irx_start, _ps2dev9_irx_size);
+	//ramfile_set(file_ptr++, "ps2dev9", _ps2dev9_irx_start, _ps2dev9_irx_size);
 	ramfile_set(file_ptr++, "debugger", _debugger_irx_start, _debugger_irx_size);
 	ramfile_set(file_ptr++, "memdisk", _memdisk_irx_start, _memdisk_irx_size);
 	ramfile_set(file_ptr++, "eesync", _eesync_irx_start, _eesync_irx_size);

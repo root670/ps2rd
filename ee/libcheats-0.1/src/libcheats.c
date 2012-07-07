@@ -154,7 +154,7 @@ int cheats_write_file(cheats_t *cheats, const char *filename)
 {
 	FILE *fp;
 
-	fp = fopen(filename, "w");
+	fp = fopen(filename, "w+");
 	if (fp == NULL) {
 		sprintf(cheats->error_text, "could not open output file %s", filename);
 		return CHEATS_FALSE;

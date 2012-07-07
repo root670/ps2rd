@@ -53,19 +53,19 @@
 #endif
 
 #ifndef DEBUGGER_INSTALL
-#define DEBUGGER_INSTALL	1
+#define DEBUGGER_INSTALL	0
 #endif
 #ifndef DEBUGGER_ADDR
 #define DEBUGGER_ADDR		0x00090000
 #endif
 #ifndef DEBUGGER_RPC_MODE
-#define DEBUGGER_RPC_MODE	1
+#define DEBUGGER_RPC_MODE	0
 #endif
 #ifndef DEBUGGER_LOAD_MODULES
-#define DEBUGGER_LOAD_MODULES	1
+#define DEBUGGER_LOAD_MODULES	0
 #endif
 #ifndef DEBUGGER_SMS_MODULES
-#define DEBUGGER_SMS_MODULES	1
+#define DEBUGGER_SMS_MODULES	0
 #endif
 #ifndef DEBUGGER_IPADDR
 #define DEBUGGER_IPADDR		"192.168.0.10"
@@ -117,6 +117,7 @@
 #define SET_USB_SUPPORT			"loader.usb_support"
 #define SET_BOOT2			"loader.boot2"
 #define SET_CHEATS_FILE			"loader.cheats"
+#define SET_PATH_IS_ABSOLUTE	"loader.path_is_absolute"
 #define SET_ENGINE_INSTALL		"engine.install"
 #define SET_ENGINE_ADDR			"engine.addr"
 #define SET_DEBUGGER_INSTALL		"debugger.install"
