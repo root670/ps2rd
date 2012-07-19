@@ -880,6 +880,7 @@ int main(int argc, char *argv[])
 						cheats_write_file( &cheats, cheatfile );
 					
 					int cheatCount = 0;
+					int nextCodeCanBeHook = 1;
 					cheat_t *cheat = NULL;
 					code_t *code = NULL;
 
@@ -894,11 +895,21 @@ int main(int argc, char *argv[])
 							CODES_FOREACH( code, &cheat->codes )
 							{
 								printf( "%08X %08X\n", code->addr, code->val );
-
-								if ( ( code->addr & 0xfe000000 ) == 0x90000000 )
-									engine.add_hook( code->addr, code->val );
+								
+								/* TODO improve check for hook */
+								if (((code->addr & 0xfe000000) == 0x90000000) && nextCodeCanBeHook == 1)
+								{
+									engine.add_hook(code->addr, code->val);
+									printf("Hook installed at %08X\n", code->addr);
+								}
 								else
-									engine.add_code( code->addr, code->val );
+									engine.add_code(code->addr, code->val);
+								
+								// Discard any false positives from being hook candidates
+								if((code->addr & 0xf0000000) == 0x40000000 || 0x30000000)
+									nextCodeCanBeHook = 0;
+								else
+									nextCodeCanBeHook = 1;
 							}
 						}
 						cheatCount++;
