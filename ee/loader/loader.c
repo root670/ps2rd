@@ -573,6 +573,8 @@ int main(int argc, char *argv[])
 					int h = 0;
 					for( h = 0; h < MAXIMUM_CHEATS; h++ )
 						enabledCheats[h] = NULL;
+						
+					numberOfEnabledCheats = 0;
 				}
 
 				enabledGame = selectedGame;
@@ -718,8 +720,9 @@ int main(int argc, char *argv[])
 			printf("pageStartingItem: %d\n", pageStartingItem);
 			printf("numberOfGameCheats: %d\n", numberOfGameCheats);
 			printf("doneLoadingCheats: %d\n", doneLoadingCheats);
-			printf("cheatPage: %d\n\n\n", cheatPage);
-			printf("oldCheatPage: %d\n\n\n", oldCheatPage);
+			printf("cheatPage: %d\n", cheatPage);
+			printf("oldCheatPage: %d\n", oldCheatPage);
+			printf("numberOfEnabledCheats: %d\n\n", numberOfEnabledCheats);
 			*/
 		}
 
