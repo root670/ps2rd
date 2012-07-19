@@ -690,7 +690,7 @@ int main(int argc, char *argv[])
 		{
 			if( curState == GAMELIST )
 			{
-				if( ( MAXIMUM_ITEMS_PER_PAGE * ( page - 1) ) > ( numberOfGameTitles - ( MAXIMUM_ITEMS_PER_PAGE * page ) ) )
+				if( ( MAXIMUM_ITEMS_PER_PAGE * ( page - 1) ) > ( numberOfGameTitles - ( MAXIMUM_ITEMS_PER_PAGE * ( page - 1) ) ) )
 				{
 					selectedGame = ( MAXIMUM_ITEMS_PER_PAGE * ( page - 2 ) );
 					cursorY = CURSOR_TOP;
