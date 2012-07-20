@@ -677,9 +677,9 @@ int main(int argc, char *argv[])
 			}
 			else if( curState == CODELIST )
 			{
-				if( ( ( MAXIMUM_ITEMS_PER_PAGE - 3) * cheatPage )  < numberOfGameCheats )
+				if( ( ( MAXIMUM_ITEMS_PER_PAGE) * cheatPage )  < numberOfGameCheats )
 				{
-					selectedCheat = ( (MAXIMUM_ITEMS_PER_PAGE-3) * cheatPage );
+					selectedCheat = ( (MAXIMUM_ITEMS_PER_PAGE) * cheatPage );
 					cursorY = CURSOR_TOP;
 					cheatPage++;
 				}
@@ -699,9 +699,9 @@ int main(int argc, char *argv[])
 			}
 			else if( curState == CODELIST )
 			{
-				if((( MAXIMUM_ITEMS_PER_PAGE - 3) * ( cheatPage - 1 )) > 0 )
+				if((( MAXIMUM_ITEMS_PER_PAGE ) * ( cheatPage - 1 )) > 0 )
 				{
-					selectedCheat = ( (MAXIMUM_ITEMS_PER_PAGE-3) * ( cheatPage - 2 ) );
+					selectedCheat = ( (MAXIMUM_ITEMS_PER_PAGE) * ( cheatPage - 2 ) );
 					cursorY = CURSOR_TOP;
 					cheatPage--;
 				}
@@ -780,8 +780,11 @@ int main(int argc, char *argv[])
 					{
 						if ( cheat != NULL )
 						{
-							cheatTitles[numberOfGameCheats] = cheat->desc;
-							numberOfGameCheats++;
+							if( cheat->desc != "" )
+							{
+								cheatTitles[numberOfGameCheats] = cheat->desc;
+								numberOfGameCheats++;
+							}
 						}
 					}
 				}				
