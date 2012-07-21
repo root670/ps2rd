@@ -227,6 +227,7 @@ int main(int argc, char *argv[])
 	cheat_t* cheat = NULL;
 	config_t config;
 	cheats_t cheats;
+	game_t *tempGame = NULL;
 	engine_t engine;
 	const char *cheatfile = NULL;
 	const char *boot2 = NULL;
@@ -334,38 +335,7 @@ int main(int argc, char *argv[])
 	else
 		cheatfile = config_get_string(&config, SET_CHEATS_FILE);
 
-	if (load_cheats(cheatfile, &cheats) < 0)
-		printf("Error: failed to load cheats from %s\n", cheatfile);
-
 	printf("Ready.\n");
-
-	// Initialize arrays to prevent memory corruption
-	int h = 0;
-	for( h = 0; h < MAXIMUM_GAMES; h++ )
-	{
-		gameTitles[h] = NULL;
-	}
-
-	h = 0;
-
-	for( h = 0; h < MAXIMUM_CHEATS; h++ )
-	{
-		enabledCheats[h] = NULL;
-	}
-
-	game_t *tempGame;
-
-	// Fill list of games
-	GAMES_FOREACH( tempGame, &cheats.games )
-	{
-		if ( tempGame != NULL )
-		{
-			gameTitles[numberOfGameTitles] = tempGame->title;
-			numberOfGameTitles++;
-		}
-	}
-
-	free(tempGame);
 
 	printf( "%d game(s) found in cheat file.\n", numberOfGameTitles );
 
@@ -388,7 +358,9 @@ int main(int argc, char *argv[])
 	int page = 1;
 	int pageStartingItem = 0;
 	int n; // temp. variable
-	int curState = GAMELIST;
+	int h = 0; // temp. variable
+	//int curState = GAMELIST;
+	int curState = LOADING;
 	int helpTick = 0;
 	int frame = 0;
 	int codeListModified = 0;
@@ -920,6 +892,50 @@ int main(int argc, char *argv[])
 				}
 				printf( "Booting game...\n" );
 				__start_elf( boot2 );
+			}
+			frame++;
+		}
+		
+		else if ( curState == LOADING )
+		{
+			RenderPromptBox( gsGlobal, BlackTran, BlueTran );
+			gsKit_fontm_print_scaled(gsGlobal, gsFont, 205, 220, 3, .60f, YellowFont, "Loading cheats...");
+			
+			if( frame >= 3 )
+			{
+				if (load_cheats(cheatfile, &cheats) < 0)
+					printf("Error: failed to load cheats from %s\n", cheatfile);
+
+				printf("Ready.\n");
+
+				// Initialize arrays to prevent memory corruption
+				int h = 0;
+				for( h = 0; h < MAXIMUM_GAMES; h++ )
+				{
+					gameTitles[h] = NULL;
+				}
+
+				h = 0;
+
+				for( h = 0; h < MAXIMUM_CHEATS; h++ )
+				{
+					enabledCheats[h] = NULL;
+				}
+
+				game_t *tempGame;
+
+				// Fill list of games
+				GAMES_FOREACH( tempGame, &cheats.games )
+				{
+					if ( tempGame != NULL )
+					{
+						gameTitles[numberOfGameTitles] = tempGame->title;
+						numberOfGameTitles++;
+					}
+				}
+
+				free(tempGame);
+				curState = GAMELIST;
 			}
 			frame++;
 		}
