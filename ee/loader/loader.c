@@ -758,7 +758,7 @@ int main(int argc, char *argv[])
 			}
 
 			// Render game name
-			char *newGameTitle = NULL;
+			char newGameTitle[256];
 			sprintf(newGameTitle, "%s (%d cheats)", gameTitles[selectedGame], numberOfGameCheats);
 			gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, 20, 3, .75f, YellowFont, newGameTitle );
 			y = CURSOR_TOP;
