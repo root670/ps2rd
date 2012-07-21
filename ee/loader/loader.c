@@ -334,8 +334,6 @@ int main(int argc, char *argv[])
 
 	printf("Ready.\n");
 
-	printf( "%d game(s) found in cheat file.\n", numberOfGameTitles );
-
 	// storage for use when changing between game list and code list
 	int gameCursorY = CURSOR_TOP;
 	int gameStartingItem = 0;
@@ -929,6 +927,8 @@ int main(int argc, char *argv[])
 				}
 
 				free(tempGame);
+				printf( "%d game(s) found in cheat file.\n", numberOfGameTitles );
+				
 				curState = GAMELIST;
 			}
 			frame++;
