@@ -255,13 +255,10 @@ int main(int argc, char *argv[])
 	dmaKit_chan_init(DMA_CHANNEL_TOSPR);
 
 	// Background colors
-	u64 Black = GS_SETREG_RGBAQ(0x00, 0x00, 0x00, 0x00, 0x00);
-	u64 Blue = GS_SETREG_RGBAQ(0x00, 0x00, 0xFF, 0x00, 0x00);
 	u64 DarkSlateBlue = GS_SETREG_RGBAQ(0x48, 0x3D, 0x8B, 0x00, 0x00);
 
 	// Font Colors
 	u64 WhiteFont = GS_SETREG_RGBAQ(0x90, 0x90, 0x90, 0x80, 0x00);
-	u64 BlackFont = GS_SETREG_RGBAQ(0x00, 0x00, 0x00, 0x80, 0x00);
 	u64 RedFont = GS_SETREG_RGBAQ(0xFF, 0x10, 0x10, 0x80, 0x00);
 	u64 GreenFont = GS_SETREG_RGBAQ(0x20, 0xFF, 0x20, 0x80, 0x00);
 	u64 YellowFont = GS_SETREG_RGBAQ(0xFF, 0xFF, 0x00, 0x80, 0x00);
@@ -341,14 +338,13 @@ int main(int argc, char *argv[])
 
 	// storage for use when changing between game list and code list
 	int gameCursorY = CURSOR_TOP;
-	int gamePage = 0;
 	int gameStartingItem = 0;
 	int oldPage;
 	
 	int doneLoadingCheats = 0;
 	int numberOfGameCheats = 0;
 	int numberOfEnabledCheats = 0;
-	int enabledGame = NULL; // game to use with codes
+	int enabledGame = 0; // game to use with codes
 	int y; // position of title to be rendered
 	int cursorY = CURSOR_TOP;
 	int selectedGame = 0;
@@ -544,7 +540,7 @@ int main(int argc, char *argv[])
 					// Reset enabled cheats
 					int h = 0;
 					for( h = 0; h < MAXIMUM_CHEATS; h++ )
-						enabledCheats[h] = NULL;
+						enabledCheats[h] = 0;
 						
 					numberOfEnabledCheats = 0;
 				}
@@ -558,7 +554,7 @@ int main(int argc, char *argv[])
 				}
 				else   // if cheat is currently enabled, disable it.
 				{
-					enabledCheats[selectedCheat] = NULL;
+					enabledCheats[selectedCheat] = 0;
 					numberOfEnabledCheats--;
 				}
 
@@ -572,7 +568,7 @@ int main(int argc, char *argv[])
 					}
 				}
 				printf("\n");
-			} else if( curState == BOOTGAME_PROMPT & _cdDiskReady( CDVD_BLOCK ) ) // boot game
+			} else if( curState == BOOTGAME_PROMPT && _cdDiskReady( CDVD_BLOCK ) ) // boot game
 			{
 				gsKit_clear( gsGlobal, DarkSlateBlue );
 				curState = BOOTGAME;
@@ -764,9 +760,9 @@ int main(int argc, char *argv[])
 			}
 
 			// Render game name
-			char newGameTitle[256];
+			char *newGameTitle = NULL;
 			sprintf(newGameTitle, "%s (%d cheats)", gameTitles[selectedGame], numberOfGameCheats);
-			gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, 20, 3, .75f, YellowFont, &newGameTitle );
+			gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, 20, 3, .75f, YellowFont, newGameTitle );
 			y = CURSOR_TOP;
 
 			if(cheatPage > oldCheatPage)
@@ -787,8 +783,6 @@ int main(int argc, char *argv[])
 						if(( enabledCheats[n] == 1 ) & ( selectedGame == enabledGame ))
 						{
 							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, cheatTitles[n]);
-							char *anotherTitle = &cheatTitles[n][0];
-							//printf("%s\n", &anotherTitle[1]);
 						}
 						else
 						{
@@ -864,7 +858,7 @@ int main(int argc, char *argv[])
 					printf("Enabled Codes:\n");
 					CHEATS_FOREACH( cheat, &tempGame->cheats )
 					{
-						if( enabledCheats[cheatCount] > NULL )
+						if( enabledCheats[cheatCount] > 0 )
 						{
 							printf( "[Code %d]\n", ( cheatCount + 1 ) );
 							CODES_FOREACH( code, &cheat->codes )
@@ -919,7 +913,7 @@ int main(int argc, char *argv[])
 
 				for( h = 0; h < MAXIMUM_CHEATS; h++ )
 				{
-					enabledCheats[h] = NULL;
+					enabledCheats[h] = 0;
 				}
 
 				game_t *tempGame;
