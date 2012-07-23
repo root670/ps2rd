@@ -858,7 +858,7 @@ int main(int argc, char *argv[])
 					{
 						if( enabledCheats[cheatCount] > 0 )
 						{
-							printf( "[Code %d]\n", ( cheatCount + 1 ) );
+							printf( "[Code %d]\n", ( ++cheatCount ) );
 							CODES_FOREACH( code, &cheat->codes )
 							{
 								printf( "%08X %08X\n", code->addr, code->val );
@@ -879,7 +879,6 @@ int main(int argc, char *argv[])
 									nextCodeCanBeHook = 1;
 							}
 						}
-						cheatCount++;
 					}
 				}
 				printf( "Booting game...\n" );
