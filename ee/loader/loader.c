@@ -569,6 +569,7 @@ int main(int argc, char *argv[])
 			} else if( curState == BOOTGAME_PROMPT && _cdDiskReady( CDVD_BLOCK ) ) // boot game
 			{
 				gsKit_clear( gsGlobal, DarkSlateBlue );
+				frame = 0;
 				curState = BOOTGAME;
 			}
 			
