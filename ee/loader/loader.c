@@ -224,6 +224,7 @@ int main(int argc, char *argv[])
 	int numberOfGameTitles = 0;
 	char *cheatTitles[MAXIMUM_GAMES];
 	int enabledCheats[MAXIMUM_CHEATS];
+	int cheatHeaders[MAXIMUM_CHEATS];
 	cheat_t* cheat = NULL;
 	config_t config;
 	cheats_t cheats;
@@ -743,12 +744,15 @@ int main(int argc, char *argv[])
 
 				if( tempGame != NULL )
 				{
+					memset(cheatHeaders, 0, sizeof(cheatHeaders)); // Clean array
 					CHEATS_FOREACH( cheat, &tempGame->cheats )
 					{
 						if ( cheat != NULL )
 						{
 							if( cheat->desc != "" )
 							{
+								if( CHEATS_FIRST(&cheat->codes) == NULL ) // No codes = header/folder
+									cheatHeaders[numberOfGameCheats] = 1;
 								cheatTitles[numberOfGameCheats] = cheat->desc;
 								numberOfGameCheats++;
 							}
@@ -782,6 +786,10 @@ int main(int argc, char *argv[])
 						if(( enabledCheats[n] == 1 ) & ( selectedGame == enabledGame ))
 						{
 							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, cheatTitles[n]);
+						}
+						else if( cheatHeaders[n] == 1 )
+						{
+							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, YellowFont, cheatTitles[n]);
 						}
 						else
 						{
