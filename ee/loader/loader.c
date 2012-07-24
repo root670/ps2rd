@@ -257,12 +257,13 @@ int main(int argc, char *argv[])
 
 	// Background colors
 	u64 DarkSlateBlue = GS_SETREG_RGBAQ(0x48, 0x3D, 0x8B, 0x00, 0x00);
+	u64 CodeBreakerBlue = GS_SETREG_RGBAQ(0x1F, 0x51, 0x83, 0x00, 0x00);
 
 	// Font Colors
-	u64 WhiteFont = GS_SETREG_RGBAQ(0x90, 0x90, 0x90, 0x80, 0x00);
-	u64 RedFont = GS_SETREG_RGBAQ(0xFF, 0x10, 0x10, 0x80, 0x00);
-	u64 GreenFont = GS_SETREG_RGBAQ(0x20, 0xFF, 0x20, 0x80, 0x00);
-	u64 YellowFont = GS_SETREG_RGBAQ(0xFF, 0xFF, 0x00, 0x80, 0x00);
+	u64 WhiteFont = GS_SETREG_RGBAQ(0xF8, 0xF8, 0xF8, 0xB0, 0x00);
+	u64 RedFont = GS_SETREG_RGBAQ(0xF8, 0x08, 0x08, 0xB0, 0x00);
+	u64 GreenFont = GS_SETREG_RGBAQ(0x00, 0xF8, 0x00, 0xB0, 0x00);
+	u64 YellowFont = GS_SETREG_RGBAQ(0xF8, 0xB8, 0x00, 0xB0, 0x00);
 	
 	// Transparent Colors
 	u64 BlackTran = GS_SETREG_RGBAQ(0x00, 0x00, 0x00, 0x25, 0x00);
@@ -367,7 +368,7 @@ int main(int argc, char *argv[])
 		oldPage = page;
 		oldCheatPage = cheatPage;
 		
-		gsKit_clear( gsGlobal, DarkSlateBlue );
+		gsKit_clear( gsGlobal, CodeBreakerBlue );
 
 		if( curState == BOOTGAME )
 		{
@@ -561,7 +562,7 @@ int main(int argc, char *argv[])
 				printf("\n");
 			} else if( curState == BOOTGAME_PROMPT && _cdDiskReady( CDVD_BLOCK ) ) // boot game
 			{
-				gsKit_clear( gsGlobal, DarkSlateBlue );
+				gsKit_clear( gsGlobal, CodeBreakerBlue );
 				frame = 0;
 				curState = BOOTGAME;
 			}
@@ -700,7 +701,7 @@ int main(int argc, char *argv[])
 				if( gameTitles[n] != NULL ) // Prevent TBL overflow
 				{
 					if(( n == enabledGame ) & ( numberOfEnabledCheats > 0 ))
-						gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, gameTitles[n]);
+						gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, YellowFont, gameTitles[n]);
 					else
 						gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, WhiteFont, gameTitles[n]);
 
@@ -757,7 +758,7 @@ int main(int argc, char *argv[])
 			// Render game name
 			char newGameTitle[256];
 			sprintf(newGameTitle, "%s (%d cheats)", gameTitles[selectedGame], numberOfGameCheats);
-			gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, 20, 3, .75f, YellowFont, newGameTitle );
+			gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, 20, 3, .75f, GreenFont, newGameTitle );
 			y = CURSOR_TOP;
 
 			if(cheatPage > oldCheatPage)
@@ -768,7 +769,7 @@ int main(int argc, char *argv[])
 			// Render cheat list
 			if (numberOfGameCheats == 0)// Game has no cheats available
 			{
-				gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, "No codes were found for this game!");
+				gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, WhiteFont, "No codes were found for this game!");
 			} else
 			{
 				for( n = pageStartingItem; n < ((MAXIMUM_ITEMS_PER_PAGE) * cheatPage); n++ )
@@ -777,11 +778,11 @@ int main(int argc, char *argv[])
 					{
 						if(( enabledCheats[n] == 1 ) & ( selectedGame == enabledGame ))
 						{
-							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, cheatTitles[n]);
+							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, YellowFont, cheatTitles[n]);
 						}
 						else if( cheatHeaders[n] == 1 )
 						{
-							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, YellowFont, cheatTitles[n]);
+							gsKit_fontm_print_scaled(gsGlobal, gsFont, 30, y, 3, 0.6f, GreenFont, cheatTitles[n]);
 						}
 						else
 						{
