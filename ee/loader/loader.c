@@ -500,12 +500,7 @@ int main(int argc, char *argv[])
 		{
 			if( curState == GAMELIST ) // Switch to cheat list
 			{
-				// Clear titles of cheats
-				h = 0;
-				for( h = 0; h < MAXIMUM_CHEATS; h++ )
-				{
-					cheatTitles[h] = NULL;
-				}
+				memset(cheatTitles, 0, sizeof(cheatTitles)); // Clear titles of cheats
 				
 				// Store current values so we can restore them when going back to the game list
 				gameCursorY = cursorY;
@@ -536,10 +531,7 @@ int main(int argc, char *argv[])
 			{
 				if( selectedGame != enabledGame )
 				{
-					// Reset enabled cheats
-					int h = 0;
-					for( h = 0; h < MAXIMUM_CHEATS; h++ )
-						enabledCheats[h] = 0;
+					memset(enabledCheats, 0, sizeof(enabledCheats)); // Reset enabled cheats
 						
 					numberOfEnabledCheats = 0;
 				}
@@ -909,19 +901,9 @@ int main(int argc, char *argv[])
 
 				printf("Ready.\n");
 
-				// Initialize arrays to prevent memory corruption
-				int h = 0;
-				for( h = 0; h < MAXIMUM_GAMES; h++ )
-				{
-					gameTitles[h] = NULL;
-				}
-
-				h = 0;
-
-				for( h = 0; h < MAXIMUM_CHEATS; h++ )
-				{
-					enabledCheats[h] = 0;
-				}
+				// Empty arrays to prevent memory corruption				
+				memset(gameTitles, 0, sizeof(gameTitles));
+				memset(enabledCheats, 0, sizeof(enabledCheats));
 
 				game_t *tempGame;
 
