@@ -257,7 +257,6 @@ int main(int argc, char *argv[])
 	dmaKit_chan_init(DMA_CHANNEL_TOSPR);
 
 	// Background colors
-	u64 DarkSlateBlue = GS_SETREG_RGBAQ(0x48, 0x3D, 0x8B, 0x00, 0x00);
 	u64 CodeBreakerBlue = GS_SETREG_RGBAQ(0x1F, 0x51, 0x83, 0x00, 0x00);
 
 	// Font Colors
@@ -279,6 +278,7 @@ int main(int argc, char *argv[])
 	//gsKit_font_upload( gsGlobal, gsFont );
 	gsKit_fontm_upload( gsGlobal, gsFont );
 
+	// fontm is monospaced
 	gsFont->Spacing = 0.65f;
 
 	gsKit_mode_switch( gsGlobal, GS_ONESHOT );
@@ -355,8 +355,6 @@ int main(int argc, char *argv[])
 	int page = 1;
 	int pageStartingItem = 0;
 	int n; // temp. variable
-	int h = 0; // temp. variable
-	//int curState = GAMELIST;
 	int curState = LOADING;
 	int helpTick = 0;
 	int frame = 0;
