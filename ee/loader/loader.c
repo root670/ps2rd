@@ -359,6 +359,7 @@ int main(int argc, char *argv[])
 	int helpTick = 0;
 	int frame = 0;
 	int codeListModified = 0;
+	int padTimer = 0;
 
 	while( 1 )
 	{
@@ -397,8 +398,12 @@ int main(int argc, char *argv[])
 			continue;
 
 		paddata = 0xffff ^ btn.btns;
-		new_pad = paddata & ~old_pad;
+		//new_pad = paddata & ~old_pad;
+		new_pad = paddata & old_pad;
 		old_pad = paddata;
+		
+		if( new_pad == 0 ) // No buttons are pressed
+			padTimer = 0;
 
 		// Read pad input
 		if( new_pad & PAD_UP )
@@ -406,6 +411,9 @@ int main(int argc, char *argv[])
 			switch( curState )
 			{
 				case GAMELIST:
+					if( padTimer > 0 && padTimer < 25 ) // Move once, then wait 25 frames
+						break;
+
 					if( selectedGame != 0 ) // Move arrow up if we're not at the beginning of the list
 					{
 						selectedGame--;
@@ -421,6 +429,8 @@ int main(int argc, char *argv[])
 					break;
 
 				case CODELIST:
+					if( padTimer > 0 && padTimer < 25 ) // Move once, then wait 25 frames
+						break;
 					if( selectedCheat != 0 )
 					{
 						selectedCheat--;
@@ -459,6 +469,8 @@ int main(int argc, char *argv[])
 			switch( curState )
 			{
 				case GAMELIST:
+				if( padTimer > 0 && padTimer < 25 ) // Move once, then wait 25 frames
+						break;
 					if( selectedGame < numberOfGameTitles - 1 )
 					{
 						if( cursorY >= ( CURSOR_TOP + ( ( MAXIMUM_ITEMS_PER_PAGE - 1 ) * CURSOR_INCREMENT) ) ) // if we've reached the bottom of a page...
@@ -477,6 +489,8 @@ int main(int argc, char *argv[])
 					break;
 
 				case CODELIST:
+				if( padTimer > 0 && padTimer < 25 ) // Move once, then wait 25 frames
+						break;
 					if( selectedCheat < numberOfGameCheats - 1 )
 					{
 						if( cursorY >= (CURSOR_TOP + ( (MAXIMUM_ITEMS_PER_PAGE - 1) * CURSOR_INCREMENT) ) )
@@ -687,6 +701,7 @@ int main(int argc, char *argv[])
 			printf("oldCheatPage: %d\n", oldCheatPage);
 			printf("numberOfEnabledCheats: %d\n\n", numberOfEnabledCheats);
 			*/
+			padTimer++;
 		}
 
 		if( ( curState ==  GAMELIST ) || ( curState == BOOTGAME_PROMPT ) )
