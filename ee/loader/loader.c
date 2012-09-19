@@ -380,7 +380,10 @@ int main(int argc, char *argv[])
 					gsKit_fontm_print_scaled(gsGlobal, gsFont, 130, 240, 3, 0.75f, RedFont, "Do NOT remove the memory card!");
 				} else
 				{
-					gsKit_fontm_print_scaled(gsGlobal, gsFont, 185, 200, 3, 1.0f, YellowFont, "Starting Game...");
+					char startingGameMessage[64];
+					sprintf(startingGameMessage, "Starting game with %d cheats enabled", numberOfEnabledCheats);
+					//gsKit_fontm_print_scaled(gsGlobal, gsFont, 185, 200, 3, 1.0f, YellowFont, "Starting Game...");
+					gsKit_fontm_print_scaled(gsGlobal, gsFont, 110, 200, 3, .65f, YellowFont, startingGameMessage);
 				}
 			} else
 			{
