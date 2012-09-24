@@ -244,9 +244,11 @@ int main(int argc, char *argv[])
 
 	GSGLOBAL *gsGlobal = gsKit_init_global();
 
+	// Main Font
 	GSFONTM *gsFont = gsKit_init_fontm();
-	//GSFONT *gsFont = gsKit_init_font(GSKIT_FTYPE_BMP_DAT, __pathname("dejavu.bmp"));
-	//GSFONT *gsFont = gsKit_init_font( GSKIT_FTYPE_PNG_DAT, __pathname("dejavu.png") );
+	
+	// Centered Font
+	GSFONTM *gsFontCentered = gsKit_init_fontm();
 
 	dmaKit_init(D_CTRL_RELE_OFF, D_CTRL_MFD_OFF, D_CTRL_STS_UNSPEC,
 				D_CTRL_STD_OFF, D_CTRL_RCYC_8, 1 << DMA_CHANNEL_GIF);
@@ -275,11 +277,13 @@ int main(int argc, char *argv[])
 
 	gsKit_mode_switch( gsGlobal, GS_ONESHOT );
 
-	//gsKit_font_upload( gsGlobal, gsFont );
 	gsKit_fontm_upload( gsGlobal, gsFont );
-
-	// fontm is monospaced
-	gsFont->Spacing = 0.65f;
+	gsKit_fontm_upload( gsGlobal, gsFontCentered );
+	
+	// Set properties of our fonts
+	gsFont->Spacing = 0.65f; // fontm is monospaced
+	gsFontCentered->Spacing = 0.65;
+	gsFontCentered->Align = GSKIT_FALIGN_CENTER;
 
 	gsKit_mode_switch( gsGlobal, GS_ONESHOT );
 
@@ -359,6 +363,7 @@ int main(int argc, char *argv[])
 	int helpTick = 0;
 	int frame = 0;
 	int codeListModified = 0;
+	const int screenCenter = (gsGlobal->Width / 2);
 
 	while( 1 )
 	{
@@ -376,18 +381,18 @@ int main(int argc, char *argv[])
 			{
 				if (codeListModified)
 				{
-					gsKit_fontm_print_scaled(gsGlobal, gsFont, 170, 200, 3, 1.0f, YellowFont, "Saving Code List...");
-					gsKit_fontm_print_scaled(gsGlobal, gsFont, 130, 240, 3, 0.75f, RedFont, "Do NOT remove the memory card!");
+					gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 200, 3, 1.0f, YellowFont, "Saving Code List...");
+					gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 240, 3, 0.75f, RedFont, "Do NOT remove the memory card!");
 				} else
 				{
 					char startingGameMessage[64];
 					sprintf(startingGameMessage, "Starting game with %d cheats enabled", numberOfEnabledCheats);
 					//gsKit_fontm_print_scaled(gsGlobal, gsFont, 185, 200, 3, 1.0f, YellowFont, "Starting Game...");
-					gsKit_fontm_print_scaled(gsGlobal, gsFont, 110, 200, 3, .65f, YellowFont, startingGameMessage);
+					gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 200, 3, .65f, YellowFont, startingGameMessage);
 				}
 			} else
 			{
-				gsKit_fontm_print_scaled(gsGlobal, gsFont, 175, 215, 3, 1.0f, YellowFont, "No cheats enabled");
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 215, 3, 1.0f, YellowFont, "No cheats enabled");
 			}
 		}
 
@@ -825,12 +830,12 @@ int main(int argc, char *argv[])
 			RenderPromptBox(gsGlobal, BlackTran, BlueTran);
 			if( _cdDiskReady( CDVD_BLOCK ) )
 			{
-				gsKit_fontm_print_scaled(gsGlobal, gsFont, 205, 220, 3, .60f, YellowFont, "Press X to start game");
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 220, 3, .60f, YellowFont, "Press X to start game");
 			} else
 			{
-				gsKit_fontm_print_scaled(gsGlobal, gsFont, 180, 220, 3, .60f, YellowFont, "Please insert a game disk");
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 220, 3, .60f, YellowFont, "Please insert a game disk");
 			}
-				gsKit_fontm_print_scaled(gsGlobal, gsFont, 185, 235, 3, .60f, YellowFont, "Press TRIANGLE to cancel.");
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 235, 3, .60f, YellowFont, "Press TRIANGLE to cancel.");
 		}
 		
 		else if( curState == DELETE_CHEAT_PROMPT )
@@ -895,7 +900,7 @@ int main(int argc, char *argv[])
 		else if ( curState == LOADING )
 		{
 			RenderPromptBox( gsGlobal, BlackTran, BlueTran );
-			gsKit_fontm_print_scaled(gsGlobal, gsFont, 205, 220, 3, .60f, YellowFont, "Loading cheats...");
+			gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 220, 3, .60f, YellowFont, "Loading cheats...");
 			
 			if( frame >= 3 )
 			{
