@@ -212,10 +212,10 @@ static int __start_elf(const char *boot2)
 
 void RenderPromptBox(GSGLOBAL *gsGlobal, u64 topColor, u64 bottomColor)
 {
-		gsKit_prim_quad_gouraud(gsGlobal, 100.0f, 100.0f,
-										  100.0f, 350.0f,
-										  540.0f, 100.0f,
-										  540.0f, 350.0f, 3,
+	gsKit_prim_quad_gouraud(gsGlobal, 100, 100,
+									  100, 350,
+									  540, 100,
+									  540, 350, 3,
 		topColor, bottomColor, topColor, bottomColor);
 }
 
