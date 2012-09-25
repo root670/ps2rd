@@ -364,6 +364,8 @@ int main(int argc, char *argv[])
 	int frame = 0;
 	int codeListModified = 0;
 	const int screenCenter = (gsGlobal->Width / 2);
+	int selectedBoot2 = 0;
+	char boot2Message[256];
 
 	while( 1 )
 	{
@@ -836,6 +838,26 @@ int main(int argc, char *argv[])
 				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 220, 3, .60f, YellowFont, "Please insert a game disk");
 			}
 				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 235, 3, .60f, YellowFont, "Press TRIANGLE to cancel.");
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 250, 3, .60f, YellowFont, "Press SQUARE to select boot2.");
+				
+				
+				// Press square to select boot2 option
+				if( new_pad & PAD_SQUARE )
+				{
+					boot2 = (new_pad & PAD_SQUARE) ?
+						config_get_string_elem(&config, SET_BOOT2, selectedBoot2++) : NULL;
+				
+					if( boot2 != NULL )
+						printf("boot2[%d] = %s\n", (selectedBoot2 - 1), boot2);
+					else
+						selectedBoot2 = 0; // go back to the first boot2 option
+				}
+				
+				if( selectedBoot2 > 0 )
+				{
+					sprintf(boot2Message, "boot2 = %s", boot2);
+					gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 280, 3, .50f, YellowFont, boot2Message);
+				}
 		}
 		
 		else if( curState == DELETE_CHEAT_PROMPT )
