@@ -537,7 +537,7 @@ int main(int argc, char *argv[])
 
 		if( new_pad & PAD_CROSS )
 		{
-			if( curState == CODELIST ) // Enable/Disable selected cheat
+			if( curState == CODELIST && !cheatHeaders[selectedCheat] ) // Enable/Disable selected cheat, ignore headers
 			{
 				if( selectedGame != enabledGame )
 				{
@@ -569,7 +569,7 @@ int main(int argc, char *argv[])
 					}
 				}
 				printf("\n");
-			} else if( curState == BOOTGAME_PROMPT && _cdDiskReady( CDVD_BLOCK ) ) // boot game
+			} else if( curState == BOOTGAME_PROMPT && __start_elf ) // boot game
 			{
 				gsKit_clear( gsGlobal, CodeBreakerBlue );
 				frame = 0;
@@ -830,7 +830,15 @@ int main(int argc, char *argv[])
 		if ( curState == BOOTGAME_PROMPT )
 		{
 			RenderPromptBox(gsGlobal, BlackTran, BlueTran);
-			if( _cdDiskReady( CDVD_BLOCK ) )
+			
+			if(numberOfEnabledCheats > 0)
+			{
+				char header[100];
+				sprintf(header, "%d cheats are enabled", numberOfEnabledCheats);
+				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 180, 3, .60f, YellowFont, header);
+			}
+			
+			if( _bootpath )
 			{
 				gsKit_fontm_print_scaled(gsGlobal, gsFontCentered, screenCenter, 220, 3, .60f, YellowFont, "Press X to start game");
 			} else
@@ -850,7 +858,10 @@ int main(int argc, char *argv[])
 					if( boot2 != NULL )
 						printf("boot2[%d] = %s\n", (selectedBoot2 - 1), boot2);
 					else
+					{
+						printf("Will boot from disk\n");
 						selectedBoot2 = 0; // go back to the first boot2 option
+					}
 				}
 				
 				if( selectedBoot2 > 0 )
